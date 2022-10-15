@@ -214,18 +214,26 @@ let package = Package(
                 .copy("Tests/Expected")
             ]
         ),
+//        .plugin(
+//            name: "SourceryCommandPlugin",
+//            capability: .command(
+//                intent: .custom(
+//                    verb: "sourcery-command",
+//                    description: "Sourcery command plugin for code generation"
+//                ),
+//                permissions: [
+//                    .writeToPackageDirectory(reason: "Need permission to write generated files to package directory")
+//                ]
+//            ),
+//            dependencies: ["SourceryExecutable"]
+//        )
         .plugin(
             name: "SourceryCommandPlugin",
-            capability: .command(
-                intent: .custom(
-                    verb: "sourcery-command",
-                    description: "Sourcery command plugin for code generation"
-                ),
-                permissions: [
-                    .writeToPackageDirectory(reason: "Need permission to write generated files to package directory")
-                ]
-            ),
-            dependencies: ["SourceryExecutable"]
+            capability: .buildTool(),
+            dependencies: [
+//                .product(name: "sourcery", package: "Sourcery"),
+                "SourceryExecutable"
+            ]
         )
     ]
 )
